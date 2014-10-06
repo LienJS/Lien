@@ -1,0 +1,26 @@
+{
+  "name": "lien",
+  "version": "1.0.0",
+  "description": "Another lightweight NodeJS framework. Lien is the link between request and response objects.'",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:IonicaBizau/lien.git"
+  },
+  "keywords": [
+    "lien",
+    "link",
+    "request",
+    "response",
+    "fraemwork"
+  ],
+  "author": "Ionică Bizău <bizauionica@gmail.com> (http://ionicabizau.net/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IonicaBizau/lien/issues"
+  },
+  "homepage": "https://github.com/IonicaBizau/lien"
+}
