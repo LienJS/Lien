@@ -27,8 +27,11 @@ var Lien = module.exports = function (opt_options) {
           , res: response
           // TODO search params
           , search: {}
+          // TODO Data
+          , data: {}
           , pathName: pathName
           , end: function (content, status) {
+                // TODO Handle content type
                 if (!content) {
                     return server.serve(this.req, this.res);
                 }
