@@ -1,4 +1,4 @@
-var Lien = require("../index");
+var Lien = require("../lib/index");
 
 var app = new Lien({
     host: "localhost"
