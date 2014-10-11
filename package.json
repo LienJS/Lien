@@ -1,7 +1,7 @@
 {
   "name": "lien",
   "version": "1.0.0",
-  "description": "Another lightweight NodeJS framework. Lien is the link between request and response objects.'",
+  "description": "Another lightweight NodeJS framework. Lien is the link between request and response objects.",
   "main": "lib/index.js",
   "scripts": {
     "test": "node test/index.js"
