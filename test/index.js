@@ -7,6 +7,6 @@ var app = new Lien({
 
 app.on("request", function (lien) {
     lien.end({
-        foo: bar
+        foo: "bar"
     });
 });
