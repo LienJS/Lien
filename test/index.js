@@ -6,5 +6,7 @@ var app = new Lien({
 });
 
 app.on("request", function (lien) {
-    lien.end("Hello World!", 200);
+    lien.end({
+        foo: bar
+    });
 });
