@@ -5,10 +5,14 @@ var app = new Lien({
   , port: 9000
 });
 
-app.on("request", function (lien) {
-    console.log(lien.req.url);
-    lien.end({
-        foo: "bar"
-      , search: lien.search
-    });
+app.page.add("/", "post", function (lien) {
+    console.log(">>>");
+    lien.end("hi");
 });
+
+//app.on("request", function (lien) {
+//    lien.end({
+//        foo: "bar"
+//      , search: lien.search
+//    });
+//});
