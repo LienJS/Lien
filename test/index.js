@@ -6,7 +6,9 @@ var app = new Lien({
 });
 
 app.on("request", function (lien) {
+    console.log(lien.req.url);
     lien.end({
         foo: "bar"
+      , search: lien.search
     });
 });
