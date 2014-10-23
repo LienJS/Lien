@@ -10,6 +10,11 @@ app.page.add("/", "post", function (lien) {
     lien.end("hi");
 });
 
+setTimeout(function () {
+    console.log(">>>");
+    app.page.delete("/");
+}, 5000);
+
 //app.on("request", function (lien) {
 //    lien.end({
 //        foo: "bar"
