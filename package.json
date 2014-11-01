@@ -27,7 +27,8 @@
     "test": "test"
   },
   "dependencies": {
-    "statique": "^1.0.0"
+    "statique": "^1.0.0",
+    "stream-buffers": "1.1.0"
   },
   "devDependencies": {}
 }
