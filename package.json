@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "statique": "^1.0.0",
-    "stream-buffers": "1.1.0",
     "node-persist": "0.0.2"
   },
   "devDependencies": {}
