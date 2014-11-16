@@ -2,13 +2,36 @@
 
 Another lightweight NodeJS framework. *Lien* is the link between request and response objects.
 
-# Installation
-Run the following commands to download and install the application:
+# Example
+
+Directory structure:
 
 ```sh
-$ git clone git@github.com:IonicaBizau/lien.git lien
-$ cd lien
-$ npm install
+$ tree
+.
+├── index.js
+└── public
+    └── index.html
+
+1 directory, 2 files
+```
+
+Main file (`index.js`)
+
+```js
+// Dependencies
+var Lien = require("../lib/index");
+
+// Init lien server
+var server = new Lien({
+    host: "localhost"
+  , port: 9000
+});
+
+// Add page
+server.page.add("/", function (lien) {
+    lien.file("/index.html");
+});
 ```
 
 # Documentation
