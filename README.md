@@ -20,7 +20,7 @@ Main file (`index.js`)
 
 ```js
 // Dependencies
-var Lien = require("../lib/index");
+var Lien = require("lien");
 
 // Init lien server
 var server = new Lien({
