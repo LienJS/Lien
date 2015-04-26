@@ -5,6 +5,7 @@ var Lien = require("../lib/index");
 var server = new Lien({
     host: "localhost"
   , port: 9000
+  , root: __dirname + "/public"
 });
 
 // Listen for load
