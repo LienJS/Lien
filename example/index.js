@@ -16,5 +16,7 @@ server.on("load", function (err) {
 
 // Add page
 server.page.add("/", function (lien) {
-    lien.file("/index.html");
+    lien.end("Hello World");
 });
+
+server.page.add("/test", "/index.html");
