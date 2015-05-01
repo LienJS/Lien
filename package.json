@@ -1,6 +1,6 @@
 {
   "name": "lien",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Another lightweight NodeJS framework. Lien is the link between request and response objects.",
   "main": "lib/index.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "test": "test"
   },
   "dependencies": {
-    "statique": "1.0.2",
+    "statique": "2.0.0",
     "node-persist": "0.0.2",
     "jxutils": "0.1.7"
   },
