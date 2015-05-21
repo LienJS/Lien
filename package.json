@@ -1,14 +1,10 @@
 {
   "name": "lien",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Another lightweight NodeJS framework. Lien is the link between request and response objects.",
   "main": "lib/index.js",
   "scripts": {
     "test": "node test/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:IonicaBizau/lien.git"
   },
   "keywords": [
     "lien",
@@ -19,11 +15,8 @@
   ],
   "author": "Ionică Bizău <bizauionica@gmail.com> (http://ionicabizau.net/)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/IonicaBizau/lien/issues"
-  },
-  "homepage": "https://github.com/IonicaBizau/lien",
   "directories": {
+    "example": "example",
     "test": "test"
   },
   "dependencies": {
@@ -31,5 +24,13 @@
     "node-persist": "0.0.2",
     "jxutils": "0.1.7"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LienJS/Lien.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LienJS/Lien/issues"
+  },
+  "homepage": "https://github.com/LienJS/Lien"
 }
