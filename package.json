@@ -1,6 +1,6 @@
 {
   "name": "lien",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Another lightweight NodeJS framework. Lien is the link between request and response objects.",
   "main": "lib/index.js",
   "scripts": {
@@ -34,6 +34,6 @@
   },
   "homepage": "https://github.com/LienJS/Lien",
   "blah": {
-      "h_img": "https://raw.githubusercontent.com/LienJS/Resources/master/logo/header.png"
+    "h_img": "https://raw.githubusercontent.com/LienJS/Resources/master/logo/header.png"
   }
 }
