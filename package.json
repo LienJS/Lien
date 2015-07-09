@@ -20,9 +20,9 @@
     "test": "test"
   },
   "dependencies": {
-    "statique": "2.0.0",
-    "node-persist": "0.0.2",
-    "jxutils": "0.1.7"
+    "jxutils": "^0.1.8",
+    "node-persist": "0.0.4",
+    "statique": "^3.0.0"
   },
   "devDependencies": {},
   "repository": {
