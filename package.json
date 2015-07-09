@@ -32,5 +32,8 @@
   "bugs": {
     "url": "https://github.com/LienJS/Lien/issues"
   },
-  "homepage": "https://github.com/LienJS/Lien"
+  "homepage": "https://github.com/LienJS/Lien",
+  "blah": {
+      "h_img": "https://raw.githubusercontent.com/LienJS/Resources/master/logo/header.png"
+  }
 }

@@ -1,5 +1,5 @@
 // Dependencies
-var Lien = require("../lib/index");
+var Lien = require("../lib");
 
 // Init lien server
 var server = new Lien({
