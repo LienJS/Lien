@@ -1,6 +1,6 @@
 {
   "name": "lien",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Another lightweight NodeJS framework. Lien is the link between request and response objects.",
   "main": "lib/index.js",
   "scripts": {
@@ -19,15 +19,10 @@
     "example": "example",
     "test": "test"
   },
-  "dependencies": {
-    "jxutils": "^0.1.8",
-    "node-persist": "0.0.4",
-    "statique": "^3.0.0"
-  },
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/LienJS/Lien.git"
+    "url": "git+https://github.com/LienJS/Lien.git"
   },
   "bugs": {
     "url": "https://github.com/LienJS/Lien/issues"
@@ -35,5 +30,12 @@
   "homepage": "https://github.com/LienJS/Lien",
   "blah": {
     "h_img": "https://raw.githubusercontent.com/LienJS/Resources/master/logo/header.png"
+  },
+  "dependencies": {
+    "iterate-object": "^1.1.0",
+    "node-persist": "^0.0.4",
+    "jxutils": "^0.1.8",
+    "set-or-get": "^1.0.0",
+    "statique": "^3.0.0"
   }
 }
