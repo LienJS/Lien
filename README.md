@@ -71,6 +71,32 @@ Creates a new Lien instance.
 #### Return
 - **Object** The Lien instance.
 
+### `add(url, fn)`
+Adds a new custom handler for specified url.
+
+#### Params
+- **String** `url`: The url to listen to.
+- **Function** `fn`: The custom handler.
+
+### `exists(url)`
+Checks if there are any url handlers.
+
+#### Params
+- **String** `url`: The url to listen to.
+
+#### Return
+- **Array|Undefined** The array of handlers or `undefined` if there is no event.
+
+### `run(url, lien)`
+Executes the custom handlers.
+
+#### Params
+- **String** `url`: The url to listen to.
+- **Lien** `lien`: The lien object.
+
+#### Return
+- **Boolean** `true` if any of the request prevented the response, `false` otherwise.
+
 ### `add(route, method, callback)`
 Adds a new page route to the Lien instance.
 
