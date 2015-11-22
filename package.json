@@ -33,8 +33,9 @@
   },
   "dependencies": {
     "iterate-object": "^1.1.0",
-    "node-persist": "^0.0.4",
     "jxutils": "^0.1.8",
+    "node-persist": "^0.0.4",
+    "ruut": "^1.1.0",
     "set-or-get": "^1.0.0",
     "statique": "^3.0.0"
   }
