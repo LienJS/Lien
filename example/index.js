@@ -19,4 +19,9 @@ server.page.add("/", function (lien) {
     lien.end("Hello World");
 });
 
+// Add a dynamic route
+server.page.add("/post/:id", function (lien) {
+    lien.end("Post id: " + lien.params.id);
+});
+
 server.page.add("/test", "/index.html");
