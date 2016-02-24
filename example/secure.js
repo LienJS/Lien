@@ -6,7 +6,7 @@ var server = new Lien({
     host: "localhost"
   , port: 9000
   , root: __dirname + "/public"
-  , certificates: {
+  , ssl: {
         key: __dirname + "/ssl/key.pem"
       , cert: __dirname + "/ssl/cert.pem"
     }
