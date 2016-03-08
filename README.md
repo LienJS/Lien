@@ -54,10 +54,10 @@ Creates a new Lien instance.
  - `root` (String): The public directory (default: `__dirname + "/public"`).
  - `cache` (Integer): The number of seconds for keeping the files in cache (default: `300`).
  - `ssl` (Object): An object containing the following fields:
-   - `key` (String): The path to the key file.
-   - `cert` (String): The path to the cert file.
-   - `_key` (String|Buffer): The key file content (defaults to the key file content).
-   - `_cert` (String|Buffer): The cert file content (defaults to the cert file content).
+     - `key` (String): The path to the key file.
+     - `cert` (String): The path to the cert file.
+     - `_key` (String|Buffer): The key file content (defaults to the key file content).
+     - `_cert` (String|Buffer): The cert file content (defaults to the cert file content).
 
 #### Return
 - **Object** The Lien instance.
