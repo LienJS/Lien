@@ -32,6 +32,7 @@
     "h_img": "https://raw.githubusercontent.com/LienJS/Resources/master/logo/header.png"
   },
   "dependencies": {
+    "cookies": "^0.6.1",
     "iterate-object": "^1.1.0",
     "jxutils": "^0.1.8",
     "node-persist": "^0.0.4",
