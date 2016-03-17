@@ -32,13 +32,11 @@
     "h_img": "https://raw.githubusercontent.com/LienJS/Resources/master/logo/header.png"
   },
   "dependencies": {
-    "cookies": "^0.6.1",
-    "iterate-object": "^1.1.0",
-    "jxutils": "^0.1.8",
-    "node-persist": "^0.0.4",
-    "parse-url": "^1.3.0",
-    "ruut": "^1.1.0",
-    "set-or-get": "^1.0.0",
-    "statique": "^3.0.0"
+    "body-parser": "^1.15.0",
+    "connect-mongo": "^1.1.0",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "find-value": "^1.0.1"
   }
 }

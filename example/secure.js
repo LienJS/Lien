@@ -5,7 +5,7 @@ var Lien = require("../lib");
 var server = new Lien({
     host: "localhost"
   , port: 9000
-  , root: __dirname + "/public"
+  , public: __dirname + "/public"
   , ssl: {
         key: __dirname + "/ssl/key.pem"
       , cert: __dirname + "/ssl/cert.pem"
@@ -19,13 +19,13 @@ server.on("load", function (err) {
 });
 
 // Add page
-server.page.add("/", function (lien) {
+server.addPage("/", function (lien) {
     lien.end("Hello World");
 });
 
 // Add a dynamic route
-server.page.add("/post/:id", function (lien) {
+server.addPage("/post/:id", function (lien) {
     lien.end("Post id: " + lien.params.id);
 });
 
-server.page.add("/test", "/index.html");
+server.addPage("/test", "/index.html");
