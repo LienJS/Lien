@@ -66,12 +66,6 @@ Redirects the client to another url.
 - **String** `newUrl`: The new url to redirect to.
 - **Boolean|Object** `query`: If `true`, the request querystring parameters will be appended. If it's an object, it will be merged with the request querystring parameters.
 
-### `_checkSessionSupport()`
-Checks if the session is supported or not.
-
-#### Return
-- **Boolean** `false` if session is *not* supported. `true` otherwise.
-
 ### `startSession(data)`
 Starts a session.
 
