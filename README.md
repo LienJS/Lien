@@ -224,6 +224,7 @@ If you are using this library in one of your projects, add it in this list. :spa
  - [`gh-contributions`](https://github.com/IonicaBizau/github-contributions)—A tool that generates a repository which being pushed into your GitHub account creates a nice contributions calendar.
  - [`learning-node-file-upload`](https://github.com/IonicaBizau/learning-nodejs)—Learning how file uploads work in a NodeJS server.
  - [`learning-nodejs-file-upload`](https://github.com/IonicaBizau/learning-nodejs)—Learning how file uploads work in a NodeJS server.
+ - [`test-youtube-api`](https://github.com/IonicaBizau/test-youtube-api)—Test Youtube API NodeJS module
  - [`web-term`](https://github.com/IonicaBizau/web-term)—A full screen terminal in your browser.
  - [`wrabbit`](https://github.com/jillix/wrabbit) (by jillix)—Wrap scripts by providing the wrapping function.
  - [`youtube-album-uploader`](https://github.com/jpchip/youtube-album-uploader) (by Jared Chapiewsky)—Uploads an mp3 album to Youtube
