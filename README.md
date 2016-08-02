@@ -19,11 +19,10 @@ $ npm i --save lien
 
 
 ```js
-// Dependencies
-var Lien = require("lien");
+const Lien = require("lien");
 
 // Init lien server
-var server = new Lien({
+let server = new Lien({
     host: "localhost"
   , port: 9000
   , public: __dirname + "/public"
@@ -45,6 +44,7 @@ server.addPage("/post/:id", lien => {
     lien.end("Post id: " + lien.params.id);
 });
 
+// Add a static file
 server.addPage("/test", "/index.html");
 server.errorPages();
 
@@ -105,7 +105,7 @@ Gets/sets/deletes headers.
 - **String** `value`: The header value to set. If `null`, the header will be *removed*.
 
 #### Return
-- **String** The specified header value from the request object.
+- **Lien** The Lien instance.
 
 ### `apiMsg(msg, status)`
 Sends to the client a JSON object containing the `message` field.
@@ -209,6 +209,39 @@ Handle the error pages.
 - **Object** `options`: An object containing the following fields:
  - `notFound` (String|Function): The path to a custom 404 page or a function receiving the lien object as parameter. This can be used to serve custom 404 pages.
  - `serverError` (String|Function): The path to a custom 500 page or a function receiving the lien object as parameter. This can be used to serve custom 500 pages.
+
+### `getHooks(type, url, method)`
+Gets the transformer for a url.
+
+#### Params
+- **String** `type`: The hook type (`before` or `after`).
+- **String** `url`: The url.
+- **String** `method`: The method.
+
+#### Return
+- **Transformer** The transformer (if it exists) or `null`.
+
+### `insertHook(type, url, method, trans)`
+Inserts a new hook.
+
+#### Params
+- **String** `type`: The hook type (`before` or `after`).
+- **String** `url`: The url.
+- **String** `method`: The method.
+- **Transformer** `trans`: The transformer to insert.
+
+#### Return
+- **Transformer** The inserted transformer.
+
+### `hook(where, url, method, cb, transType)`
+Adds a new hook.
+
+#### Params
+- **String** `where`: The hook type (`before` or `after`).
+- **String** `url`: The route url.
+- **String** `method`: The HTTP method.
+- **Function** `cb`: The callback function.
+- **Number** `transType`: The transformer type.
 
 
 
