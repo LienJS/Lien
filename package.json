@@ -1,11 +1,11 @@
 {
+  "scripts": {
+    "test": "node test/index.js"
+  },
   "name": "lien",
   "version": "1.0.3",
   "description": "Another lightweight NodeJS framework. Lien is the link between request and response objects.",
   "main": "lib/index.js",
-  "scripts": {
-    "test": "node test/index.js"
-  },
   "keywords": [
     "lien",
     "link",
@@ -19,7 +19,9 @@
     "example": "example",
     "test": "test"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "tester": "^1.3.4"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LienJS/Lien.git"

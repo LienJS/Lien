@@ -1,23 +1,11 @@
-var Lien = require("../lib/index");
+"use strict";
 
-var app = new Lien({
-    host: "localhost"
-  , port: 9000
+const tester = require("tester")
+    , lien = require("..")
+    ;
+
+tester.describe("lien", t => {
+    t.should("Another lightweight NodeJS framework. Lien is the link between request and response objects.", () => {
+        t.except(lien()).toEqual(/*...*/);
+    });
 });
-
-app.page.add("/", "post", function (lien) {
-    console.log(">>>");
-    lien.end("hi");
-});
-
-setTimeout(function () {
-    console.log(">>>");
-    app.page.delete("/");
-}, 5000);
-
-//app.on("request", function (lien) {
-//    lien.end({
-//        foo: "bar"
-//      , search: lien.search
-//    });
-//});
