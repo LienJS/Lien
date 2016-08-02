@@ -1,8 +1,9 @@
-// Dependencies
-var Lien = require("../lib");
+"use strict";
+
+const Lien = require("../lib");
 
 // Init lien server
-var server = new Lien({
+let server = new Lien({
     host: "localhost"
   , port: 9000
   , public: __dirname + "/public"
@@ -22,6 +23,13 @@ server.addPage("/", lien => {
 // Add a dynamic route
 server.addPage("/post/:id", lien => {
     lien.end("Post id: " + lien.params.id);
+});
+
+server.hook("before", "/post/:id", "get", (lien, next) => {
+    console.log(">> " + lien.path + " | " + lien.query.id);
+    setTimeout(function() {
+        next();
+    }, 100);
 });
 
 server.addPage("/test", "/index.html");
