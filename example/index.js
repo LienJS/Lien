@@ -25,26 +25,7 @@ server.addPage("/post/:id", lien => {
     lien.end("Post id: " + lien.params.id);
 });
 
-server.hook("before", "/post/:id", "get", lien => {
-    console.log("Before");
-});
-
-server.hook("after", "/post/:id", "get", (res, next) => {
-    setTimeout(function() {
-        res.content = "hi";
-        next();
-    }, 1000);
-
-});
-
-
-server.hook("before", "/post/:id", "get", (lien, next) => {
-    console.log(">> " + lien.path + " | " + lien.query.id);
-    setTimeout(function() {
-        next();
-    }, 1000);
-});
-
+// Add a static file
 server.addPage("/test", "/index.html");
 server.errorPages();
 
