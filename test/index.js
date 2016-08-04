@@ -89,6 +89,83 @@ tester.describe("lien", t => {
         });
     });
 
+    t.should("add different pages, overriding the public dir", () => {
+        server.addPage("/foo/bar", lien => {
+            lien.end("foo bar");
+        });
+        server.addPage("/foo/:dyn", lien => {
+            lien.end("foo:" + lien.params.dyn);
+        });
+    });
+
+    t.it("check foo index before adding the custom route", cb => {
+        request(`${URL}foo`, (err, body, res) => {
+            t.expect(body).toBe("html foo\n");
+            t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
+
+    t.it("load static HTML file", cb => {
+        request(`${URL}test.html`, (err, body, res) => {
+            t.expect(body).toBe("test\n");
+            t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
+
+    t.it("check foo/bar ", cb => {
+        request(`${URL}foo/bar`, (err, body, res) => {
+            t.expect(body).toBe("foo bar");
+            t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
+
+    t.should("override public dir", () => {
+        server.addPage("/foo", lien => {
+            lien.end("foo index");
+        });
+    });
+
+    t.it("check foo index after adding the custom route", cb => {
+        request(`${URL}foo`, (err, body, res) => {
+            t.expect(body).toBe("foo index");
+            t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
+
+    t.it("check foo/:dyn ", cb => {
+        request(`${URL}foo/baz`, (err, body, res) => {
+            t.expect(body).toBe("foo:baz");
+            t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
+
+    t.should("add dynamic page", () => {
+        server.addPage("/:fooo", lien => {
+            lien.end("dynamic:" + lien.params.fooo);
+        });
+    });
+
+    t.it("check /:dyn ", cb => {
+        request(`${URL}baz`, (err, body, res) => {
+            t.expect(body).toBe("dynamic:baz");
+            t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
+
+    t.it("load static HTML file", cb => {
+        request(`${URL}test.html`, (err, body, res) => {
+            t.expect(body).toBe("test\n");
+            t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
+
     t.should("close the server", cb => {
         cb();
         process.exit();
