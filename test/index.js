@@ -32,6 +32,14 @@ tester.describe("lien", t => {
 
         // Add a dynamic route
         server.addPage("/post/:id", lien => {
+            debugger
+            if (lien.fromBeforeHook) {
+                let res = "1";
+                if (lien.anotherFromBeforeHook) {
+                    res += "1";
+                }
+                return lien.end(res);
+            }
             lien.end("Post id: " + lien.params.id);
         });
 
@@ -60,15 +68,37 @@ tester.describe("lien", t => {
         });
     });
 
+    t.should("check before adding the hook", cb => {
+        request(`${URL}post/12`, (err, body, res) => {
+            t.expect(body).toBe("Post id: 12");
+            t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
+
     t.should("add before hook", () => {
         server.hook("before", "/post/:id", "get", lien => {
             lien.fromBeforeHook = true;
         });
     });
 
-    t.should("check before hook", cb => {
+    t.should("check after the before hook", cb => {
         request(`${URL}post/12`, (err, body, res) => {
-            t.expect(body).toBe("Post id: 12");
+            t.expect(body).toBe("1");
+            t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
+
+    t.should("add before hook", () => {
+        server.hook("before", "*", "get", lien => {
+            lien.anotherFromBeforeHook = true;
+        });
+    });
+
+    t.should("check after the before hook", cb => {
+        request(`${URL}post/12`, (err, body, res) => {
+            t.expect(body).toBe("11");
             t.expect(res.statusCode).toBe(200);
             cb();
         });
@@ -80,6 +110,7 @@ tester.describe("lien", t => {
             next();
         });
     });
+
 
     t.should("check after hook", cb => {
         request(`${URL}post/12`, (err, body, res) => {
