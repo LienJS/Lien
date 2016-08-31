@@ -32,7 +32,6 @@ tester.describe("lien", t => {
 
         // Add a dynamic route
         server.addPage("/post/:id", lien => {
-            debugger
             if (lien.fromBeforeHook) {
                 let res = "1";
                 if (lien.anotherFromBeforeHook) {
@@ -51,6 +50,7 @@ tester.describe("lien", t => {
             console.log(err.stack);
         });
     });
+
 
     t.should("static route", cb => {
         request(URL, (err, body, res) => {
@@ -116,6 +116,46 @@ tester.describe("lien", t => {
         request(`${URL}post/12`, (err, body, res) => {
             t.expect(body).toBe("hi");
             t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
+
+    t.should("add different pages", () => {
+        let articleIds = {
+            a: "Hello World!"
+          , b: "Hello Mars!"
+        };
+        server.addPage("/foo/article/:id", lien => {
+            let content = articleIds[lien.params.id];
+            if (content) {
+                lien.end(content);
+            } else {
+                lien.next();
+            }
+        });
+    });
+
+    t.it("possible-404 page (foo/article/a)", cb => {
+        request(`${URL}foo/article/a`, (err, body, res) => {
+            t.expect(body).toBe("Hello World!");
+            t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
+
+    t.it("possible-404 page (foo/article/b)", cb => {
+        request(`${URL}foo/article/b`, (err, body, res) => {
+            t.expect(body).toBe("Hello Mars!");
+            t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
+
+    t.it("possible-404 page (foo/article/c)", cb => {
+        request(`${URL}foo/article/c`, (err, body, res) => {
+            t.expect(err).toBe(null);
+            t.expect(body.match("404")).toNotBe(null);
+            t.expect(res.statusCode).toBe(404);
             cb();
         });
     });
@@ -189,14 +229,16 @@ tester.describe("lien", t => {
         });
     });
 
-    // TODO Not sure if we should call this a feature or bug
-    // t.it("load static HTML file", cb => {
-    //     request(`${URL}test.html`, (err, body, res) => {
-    //         t.expect(body).toBe("test\n");
-    //         t.expect(res.statusCode).toBe(200);
-    //         cb();
-    //     });
-    // });
+    t.it("load static HTML file", cb => {
+        server.hook("before", ":foo.*", (lien, cb) => {
+            lien.next();
+        });
+        request(`${URL}test.html`, (err, body, res) => {
+            t.expect(body).toBe("test\n");
+            t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
 
     t.should("close the server", cb => {
         cb();
