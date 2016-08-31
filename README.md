@@ -66,6 +66,12 @@ Creates the `lien` object.
 #### Return
 - **Lien** The lien object.
 
+### `next()`
+Go to the next middleware handler.
+
+#### Return
+- **Lien** The `Lien` instance.
+
 ### `redirect(newUrl, query)`
 Redirects the client to another url.
 
