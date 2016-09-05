@@ -2,12 +2,14 @@
 
 You can see below the API reference of this module.
 
-### `LienCreator(req, res)`
+### `LienCreator(req, res, next, server)`
 Creates the `lien` object.
 
 #### Params
 - **Object** `req`: The request object.
 - **Object** `res`: The response object.
+- **Function** `next`: The `next` middleware function.
+- **Object** `server`: The `Lien` server instance.
 
 #### Return
 - **Lien** The lien object.
@@ -24,6 +26,13 @@ Redirects the client to another url.
 #### Params
 - **String** `newUrl`: The new url to redirect to.
 - **Boolean|Object** `query`: If `true`, the request querystring parameters will be appended. If it's an object, it will be merged with the request querystring parameters.
+
+### `render(template, data)`
+Renders a template to the client.
+
+#### Params
+- **String** `template`: The template name.
+- **Object** `data`: The template data.
 
 ### `startSession(data)`
 Starts a session.
@@ -136,6 +145,10 @@ It emits the following events:
      - `cert` (String): The path to the cert file.
      - `_key` (String|Buffer): The key file content (defaults to the key file content).
      - `_cert` (String|Buffer): The cert file content (defaults to the cert file content).
+
+ - `views`
+   - `path` (String): The path to the views directory.
+   - `name` (String): The view engine name.
 
  - `errorPages` (Object):
    - `notFound` (String|Function): The path to a custom 404 page or a function receiving the lien object as parameter. This can be used to serve custom 404 pages.
