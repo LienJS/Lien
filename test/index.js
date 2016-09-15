@@ -20,6 +20,10 @@ tester.describe("lien", t => {
             host: "localhost"
           , port: 9000
           , public: __dirname + "/public"
+          , views: {
+                path: `${__dirname}/views`
+              , name: "ajs"
+            }
         });
 
         // Listen for load
@@ -48,6 +52,12 @@ tester.describe("lien", t => {
 
         server.on("serverError", err => {
             console.log(err.stack);
+        });
+    });
+
+    t.it("add a static url which renders templates", () => {
+        server.addPage("/templates/foo", lien => {
+            lien.render("main", { page: "Home" });
         });
     });
 
@@ -231,10 +241,21 @@ tester.describe("lien", t => {
 
     t.it("load static HTML file", cb => {
         server.hook("before", ":foo.*", (lien, cb) => {
+            if (!~lien.path.indexOf(".")) {
+                return cb();
+            }
             lien.next();
         });
         request(`${URL}test.html`, (err, body, res) => {
             t.expect(body).toBe("test\n");
+            t.expect(res.statusCode).toBe(200);
+            cb();
+        });
+    });
+
+    t.it("add a static url which renders templates", cb => {
+        request(`${URL}templates/foo`, (err, body, res) => {
+            t.expect(body).toBe("<h1>Page: Home</h1>\n");
             t.expect(res.statusCode).toBe(200);
             cb();
         });

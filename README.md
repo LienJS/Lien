@@ -56,12 +56,14 @@ server.on("serverError", err => {
 ## :memo: Documentation
 
 
-### `LienCreator(req, res)`
+### `LienCreator(req, res, next, server)`
 Creates the `lien` object.
 
 #### Params
 - **Object** `req`: The request object.
 - **Object** `res`: The response object.
+- **Function** `next`: The `next` middleware function.
+- **Object** `server`: The `Lien` server instance.
 
 #### Return
 - **Lien** The lien object.
@@ -78,6 +80,13 @@ Redirects the client to another url.
 #### Params
 - **String** `newUrl`: The new url to redirect to.
 - **Boolean|Object** `query`: If `true`, the request querystring parameters will be appended. If it's an object, it will be merged with the request querystring parameters.
+
+### `render(template, data)`
+Renders a template to the client.
+
+#### Params
+- **String** `template`: The template name.
+- **Object** `data`: The template data.
 
 ### `startSession(data)`
 Starts a session.
@@ -191,6 +200,10 @@ It emits the following events:
      - `_key` (String|Buffer): The key file content (defaults to the key file content).
      - `_cert` (String|Buffer): The cert file content (defaults to the cert file content).
 
+ - `views`
+   - `path` (String): The path to the views directory.
+   - `name` (String): The view engine name.
+
  - `errorPages` (Object):
    - `notFound` (String|Function): The path to a custom 404 page or a function receiving the lien object as parameter. This can be used to serve custom 404 pages.
    - `serverError` (String|Function): The path to a custom 500 page or a function receiving the lien object as parameter. This can be used to serve custom 500 pages.
@@ -254,19 +267,6 @@ Adds a new hook.
 ## :yum: How to contribute
 Have an idea? Found a bug? See [how to contribute][contributing].
 
-## :dizzy: Where is this library used?
-If you are using this library in one of your projects, add it in this list. :sparkles:
-
-
- - [`bloggify-server-prebuilt`](https://bitbucket.org/bloggify/bloggify-server-prebuilt#readme)—Bundled and minified Bloggify server.
- - [`bnotify`](https://github.com/IonicaBizau/bnotify)—A notification system written in NodeJS using the BAT platform.
- - [`gh-contributions`](https://github.com/IonicaBizau/github-contributions)—A tool that generates a repository which being pushed into your GitHub account creates a nice contributions calendar.
- - [`learning-node-file-upload`](https://github.com/IonicaBizau/learning-nodejs)—Learning how file uploads work in a NodeJS server.
- - [`learning-nodejs-file-upload`](https://github.com/IonicaBizau/learning-nodejs)—Learning how file uploads work in a NodeJS server.
- - [`test-youtube-api`](https://github.com/IonicaBizau/test-youtube-api)—Test Youtube API NodeJS module
- - [`web-term`](https://github.com/IonicaBizau/web-term)—A full screen terminal in your browser.
- - [`wrabbit`](https://github.com/jillix/wrabbit) (by jillix)—Wrap scripts by providing the wrapping function.
- - [`youtube-album-uploader`](https://github.com/jpchip/youtube-album-uploader) (by Jared Chapiewsky)—Uploads an mp3 album to Youtube
 
 ## :scroll: License
 
