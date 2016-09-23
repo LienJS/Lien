@@ -55,6 +55,21 @@ tester.describe("lien", t => {
         });
     });
 
+    t.it("add a static url to test lien fields", (cb) => {
+        let url = `${URL}templates/bar?foo=bar`;
+        server.addPage("/templates/bar", lien => {
+            t.expect(lien.href).toBe(url.replace(":9000", ""));
+            t.expect(lien.path).toBe("/templates/bar");
+            t.expect(lien.full_path).toBe("/templates/bar?foo=bar");
+            t.expect(lien.host).toBe("localhost");
+            t.expect(lien.protocol).toBe("http");
+            t.expect(lien.domain).toBe("http://localhost");
+            t.expect(lien.query.foo).toBe("bar");
+            lien.end();
+        });
+        request(url, cb);
+    });
+
     t.it("add a static url which renders templates", () => {
         server.addPage("/templates/foo", lien => {
             lien.render("main", { page: "Home" });
