@@ -47,7 +47,7 @@ tester.describe("lien", t => {
         });
 
         // Add a static file
-        server.addPage("/test", "/index.html");
+        server.addPage("/test", "index.html");
         server.errorPages();
 
         server.on("serverError", err => {
