@@ -164,7 +164,10 @@ Adds a new page to be handled.
 
 #### Params
 - **String** `url`: The page url.
-- **String** `method`: The request methods to be handled (default: `"all"`).
+- **String|Object** `method`: The request methods to be handled (default: `"all"`) or an object:
+ - `method` (String): The HTTP method.
+ - `before` (Array|Function): A function or an array of middleware functions to be executed *before* the main function.
+ - `after` (Array|Function): A function or an array of middleware functions to be executed *after* the main function.
 - **Function** `output`: A function receiving the `lien` object as parameter. If can be a path serving a public file.
 
 ### `errorPages(options)`
