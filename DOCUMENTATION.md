@@ -190,7 +190,7 @@ Gets the transformer for a url.
 Inserts a new hook.
 
 #### Params
-- **String** `type`: The hook type (`before` or `after`).
+- **String** `type`: The hook type (`before`, `after`, `custom:name`).
 - **String** `url`: The url.
 - **String** `method`: The method.
 - **Transformer** `trans`: The transformer to insert.
