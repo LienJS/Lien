@@ -207,8 +207,10 @@ It emits the following events:
  - `errorPages` (Object):
    - `notFound` (String|Function): The path to a custom 404 page or a function receiving the lien object as parameter. This can be used to serve custom 404 pages.
    - `serverError` (String|Function): The path to a custom 500 page or a function receiving the lien object as parameter. This can be used to serve custom 500 pages.
+   - `badCsrf` (String|Function):  The path to a custom bad CSRF page or a function receiving the lien object as parameter. This can be used to serve custom bad CSRF errors.
 
  - `logErrors` (Boolean): Log the server errors (default: `true`).
+ - `csrf` (Object): The CSRF options. These are passed to [`csurf`](https://github.com/expressjs/csurf)
 
 #### Return
 - **Object** The Lien instance.
