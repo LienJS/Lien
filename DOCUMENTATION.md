@@ -191,6 +191,18 @@ Gets the transformer for a url.
 #### Return
 - **Transformer** The transformer (if it exists) or `null`.
 
+### `getHooksStrict(type, url, method)`
+Similar to `getHooks`, but doesn't concat hooks based on the regex
+matching but only if they are the same regex.
+
+#### Params
+- **String** `type`: The hook type (`before` or `after`).
+- **String** `url`: The url.
+- **String** `method`: The method.
+
+#### Return
+- **Transformer** The transformer (if it exists) or `null`.
+
 ### `insertHook(type, url, method, trans)`
 Inserts a new hook.
 
