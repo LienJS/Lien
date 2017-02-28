@@ -3,7 +3,7 @@
     "test": "node test/index.js"
   },
   "name": "lien",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "Another lightweight NodeJS framework. Lien is the link between request and response objects.",
   "main": "lib/index.js",
   "keywords": [
