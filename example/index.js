@@ -5,7 +5,7 @@ const Lien = require("../lib");
 // Init lien server
 const server = new Lien({
     port: 9000
-  , public: __dirname + "/public"
+  , public: `${__dirname}/public`
 });
 
 // Listen for load

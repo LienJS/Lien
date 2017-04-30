@@ -4,7 +4,7 @@
   },
   "name": "lien",
   "version": "3.0.0",
-  "description": "Another lightweight NodeJS framework. Lien is the link between request and response objects.",
+  "description": "An easy to use web framework for Node.js.",
   "main": "lib/index.js",
   "keywords": [
     "lien",
