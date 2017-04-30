@@ -10,9 +10,10 @@ const users = {
 const app = new Lien({
     host: "localhost"
   , port: 9000
-  , public: __dirname + "/public"
+  , public: `${__dirname}/public`
   , session: {
-        storeOptions: {
+        store: "connect-mongo"
+      , storeOptions: {
             url: "mongodb://localhost/test-app"
         }
     }
@@ -25,7 +26,7 @@ app.on("load", err => {
 });
 
 // Add page
-app.addPage("/", lien => {
+app.all("/", lien => {
     if (lien.getSessionData("logged_in")) {
         lien.file("logout.html");
     } else {
@@ -33,7 +34,7 @@ app.addPage("/", lien => {
     }
 });
 
-app.addPage("/api/login", "post", lien => {
+app.post("/api/login", lien => {
     if (!lien.data.username || !lien.data.password) {
         return lien.apiError("Incomplete data.");
     }
@@ -54,11 +55,11 @@ app.addPage("/api/login", "post", lien => {
     lien.apiError("Invalid credentials.", 403);
 });
 
-app.addPage("/api/session", lien => {
+app.get("/api/session", lien => {
     lien.end(lien.getSessionData());
 });
 
-app.addPage("/api/logout", "post", lien => {
+app.post("/api/logout", lien => {
     if (!lien.getSessionData("logged_in")) {
         return lien.apiError("You were not logged in anyways.");
     }
@@ -68,11 +69,11 @@ app.addPage("/api/logout", "post", lien => {
 });
 
 // Add a dynamic route
-app.addPage("/post/:id", lien => {
+app.get("/post/:id", lien => {
     lien.end("Post id: " + lien.params.id);
 });
 
-app.addPage("/test", "/index.html");
+app.get("/test", "/index.html");
 
 app.on("serverError", err => {
     console.log(err.stack);
