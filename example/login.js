@@ -73,6 +73,32 @@ app.get("/post/:id", lien => {
     lien.end("Post id: " + lien.params.id);
 });
 
+app.use("/auth", (lien, next) => {
+    const username = lien.getSessionData("username");
+    lien.user = username ? {
+        name: username
+    } : null;
+    if (!lien.user) {
+        return lien.status(403).json({
+            error: "Unauthorized"
+        });
+    }
+    next();
+});
+
+app.get("/auth", lien => {
+    lien.end({
+        user: "/auth/user"
+    });
+});
+
+app.get("/auth/user", lien => {
+    lien.end({
+        foo: "Bar",
+        user: lien.user
+    });
+});
+
 app.get("/test", "/index.html");
 
 app.on("serverError", err => {
