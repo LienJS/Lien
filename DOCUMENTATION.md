@@ -121,43 +121,43 @@ It emits the following events:
 
 #### Params
 - **Object** `opt_options`: An object containing the following properties:
- - `host` (String): The server host.
- - `port` (Integer): The server port. `process.env.PORT` is used, default is `3000`.
- - `session` (Boolean|Object): Enable the session support. If it's an object, it will be merged with the following defaults and passed to [`express-session`](https://github.com/expressjs/session):
-   - `secret` (String): This is the secret used to sign the session ID cookie (default: "lien server").
-   - `resave` (Boolean): Forces the session to be saved back to the session store, even if the session was never modified during the request (default: false).
-   - `saveUninitialized` (Boolean): Forces a session that is "uninitialized" to be saved to the store (default: `true`).
-   - `cookie` (Object): The cookie [options](https://github.com/expressjs/cookie-parser).
-   - `storeOptions` (Object): The session store options. These options are passed to the session store you choose.
-   - `store`: (String|Function): The session store name or function. By default it's using a memory store if the session is enabled.
- - `public` (String|Array): The path to the public directory or an array of arrays in this format: `["/url/of/static/dir", "path/to/static/dir"]`.
+    - `host` (String): The server host.
+    - `port` (Integer): The server port. `process.env.PORT` is used, default is `3000`.
+    - `session` (Boolean|Object): Enable the session support. If it's an object, it will be merged with the following defaults and passed to [`express-session`](https://github.com/expressjs/session):
+      - `secret` (String): This is the secret used to sign the session ID cookie (default: "lien server").
+      - `resave` (Boolean): Forces the session to be saved back to the session store, even if the session was never modified during the request (default: false).
+      - `saveUninitialized` (Boolean): Forces a session that is "uninitialized" to be saved to the store (default: `true`).
+      - `cookie` (Object): The cookie [options](https://github.com/expressjs/cookie-parser).
+      - `storeOptions` (Object): The session store options. These options are passed to the session store you choose.
+      - `store`: (String|Function): The session store name or function. By default it's using a memory store if the session is enabled.
+    - `public` (String|Array): The path to the public directory or an array of arrays in this format: `["/url/of/static/dir", "path/to/static/dir"]`.
 
-   Example:
+      Example:
 
-   ```js
-   [
-     ["/images", "path/to/images"]
-   , ["/", "path/to/public"]
-   ]
-   ```
+      ```js
+      [
+        ["/images", "path/to/images"]
+      , ["/", "path/to/public"]
+      ]
+      ```
 
- - `ssl` (Object): An object containing the following fields:
-     - `key` (String): The path to the key file.
-     - `cert` (String): The path to the cert file.
-     - `_key` (String|Buffer): The key file content (defaults to the key file content).
-     - `_cert` (String|Buffer): The cert file content (defaults to the cert file content).
+    - `ssl` (Object): An object containing the following fields:
+        - `key` (String): The path to the key file.
+        - `cert` (String): The path to the cert file.
+        - `_key` (String|Buffer): The key file content (defaults to the key file content).
+        - `_cert` (String|Buffer): The cert file content (defaults to the cert file content).
 
- - `views`
-   - `path` (String): The path to the views directory.
-   - `name` (String): The view engine name.
+    - `views`
+      - `path` (String): The path to the views directory.
+      - `name` (String): The view engine name.
 
- - `errorPages` (Object):
-   - `notFound` (String|Function): The path to a custom 404 page or a function receiving the lien object as parameter. This can be used to serve custom 404 pages.
-   - `serverError` (String|Function): The path to a custom 500 page or a function receiving the lien object as parameter. This can be used to serve custom 500 pages.
-   - `badCsrf` (String|Function):  The path to a custom bad CSRF page or a function receiving the lien object as parameter. This can be used to serve custom bad CSRF errors.
+    - `errorPages` (Object):
+      - `notFound` (String|Function): The path to a custom 404 page or a function receiving the lien object as parameter. This can be used to serve custom 404 pages.
+      - `serverError` (String|Function): The path to a custom 500 page or a function receiving the lien object as parameter. This can be used to serve custom 500 pages.
+      - `badCsrf` (String|Function):  The path to a custom bad CSRF page or a function receiving the lien object as parameter. This can be used to serve custom bad CSRF errors.
 
- - `logErrors` (Boolean): Log the server errors (default: `true`).
- - `csrf` (Object): The CSRF options. These are passed to [`csurf`](https://github.com/expressjs/csurf)
+    - `logErrors` (Boolean): Log the server errors (default: `true`).
+    - `csrf` (Object): The CSRF options. These are passed to [`csurf`](https://github.com/expressjs/csurf)
 
 #### Return
 - **Object** The Lien instance.
@@ -175,9 +175,9 @@ Adds a new page to be handled.
 #### Params
 - **String** `url`: The page url.
 - **String|Object** `method`: The request methods to be handled (default: `"all"`) or an object:
- - `method` (String): The HTTP method.
- - `before` (Array|Function): A function or an array of middleware functions to be executed *before* the main function.
- - `after` (Array|Function): A function or an array of middleware functions to be executed *after* the main function.
+   - `method` (String): The HTTP method.
+   - `before` (Array|Function): A function or an array of middleware functions to be executed *before* the main function.
+   - `after` (Array|Function): A function or an array of middleware functions to be executed *after* the main function.
 - **Function** `output`: A function receiving the `lien` object as parameter. If can be a path serving a public file.
 
 ### `errorPages(options)`
