@@ -260,3 +260,11 @@ Use this function to add middleware handlers.
 - **Function** `cb`: The callback function.
 - **Number** `transType`: The transformer type.
 
+### `add(url, method, cb)`
+Adds a new middleware. **Note**: This will *not* trigger the hooks.
+
+#### Params
+- **String** `url`: The endpoint url.
+- **String** `method`: The HTTP method (default: `all`).
+- **Function** `cb`: The callback function.
+

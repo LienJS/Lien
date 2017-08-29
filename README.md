@@ -322,6 +322,14 @@ Use this function to add middleware handlers.
 - **Function** `cb`: The callback function.
 - **Number** `transType`: The transformer type.
 
+### `add(url, method, cb)`
+Adds a new middleware. **Note**: This will *not* trigger the hooks.
+
+#### Params
+- **String** `url`: The endpoint url.
+- **String** `method`: The HTTP method (default: `all`).
+- **Function** `cb`: The callback function.
+
 
 
 ## :yum: How to contribute
@@ -352,6 +360,7 @@ If you are using this library in one of your projects, add it in this list. :spa
  - [`bloggify-prebuilt`](https://github.com/Bloggify/bloggify-prebuilt#readme)—The prebuilt Bloggify version.
  - [`bloggify-server-prebuilt`](https://bitbucket.org/bloggify/bloggify-server-prebuilt#readme)—Bundled and minified Bloggify server.
  - [`bnotify`](https://github.com/IonicaBizau/bnotify)—A notification system written in NodeJS using the BAT platform.
+ - [`chewb-youtube-uploader`](https://github.com/samradical/youtube-uploader) (by Sam Elie)—Wrapper tool around a great uploader.
  - [`gh-contributions`](https://github.com/IonicaBizau/github-contributions)—A tool that generates a repository which being pushed into your GitHub account creates a nice contributions calendar.
  - [`learning-node-file-upload`](https://github.com/IonicaBizau/learning-nodejs)—Learning how file uploads work in a NodeJS server.
  - [`learning-nodejs-file-upload`](https://github.com/IonicaBizau/learning-nodejs)—Learning how file uploads work in a NodeJS server.
