@@ -6,6 +6,7 @@ You can see below the API reference of this module.
 Creates the `lien` object.
 
 #### Params
+
 - **Object** `req`: The request object.
 - **Object** `res`: The response object.
 - **Function** `next`: The `next` middleware function.
@@ -24,6 +25,7 @@ Go to the next middleware handler.
 Redirects the client to another url.
 
 #### Params
+
 - **String** `newUrl`: The new url to redirect to.
 - **Boolean|Object** `query`: If `true`, the request querystring parameters will be appended. If it's an object, it will be merged with the request querystring parameters.
 
@@ -31,6 +33,7 @@ Redirects the client to another url.
 Renders a template to the client.
 
 #### Params
+
 - **String** `template`: The template name.
 - **Object** `data`: The template data.
 
@@ -38,18 +41,21 @@ Renders a template to the client.
 Starts a session.
 
 #### Params
+
 - **Object** `data`: The session data.
 
 ### `setSessionData(data)`
 Sets the session data.
 
 #### Params
+
 - **Object** `data`: The session data.
 
 ### `getSessionData(field)`
 Returns the session data object/specific field.
 
 #### Params
+
 - **Field** `field`: A specific field to get from the session object.
 
 #### Return
@@ -62,6 +68,7 @@ Destroys the session.
 Gets/sets/deletes headers.
 
 #### Params
+
 - **String** `name`: The header name.
 - **String** `value`: The header value to set. If `null`, the header will be *removed*.
 
@@ -72,6 +79,7 @@ Gets/sets/deletes headers.
 Sends to the client a JSON object containing the `message` field.
 
 #### Params
+
 - **String** `msg`: The API message.
 - **Number** `status`: The status code (default: `200`).
 
@@ -79,6 +87,7 @@ Sends to the client a JSON object containing the `message` field.
 Like `apiMsg`, but by default with a status code of `422`.
 
 #### Params
+
 - **String** `msg`: The API message.
 - **Number** `status`: The status code (default: `422`).
 
@@ -86,6 +95,7 @@ Like `apiMsg`, but by default with a status code of `422`.
 Ends the response sending the content.
 
 #### Params
+
 - **Anything** `content`: The content that should be sent to the response.
 - **Number** `status`: The status code.
 - **String** `contentType`: The content type (e.g. `"json"`).
@@ -95,6 +105,7 @@ Ends the response sending the content.
 Sets, gets or deletes the cookie.
 
 #### Params
+
 - **String** `cookie`: The searched cookie.
 - **String** `value`: If provided and it not `null`, the cookie will be set. If it's null, the cookie will be deleted. If `value` is not provided, the cookie value will be returned.
 
@@ -105,6 +116,7 @@ Sets, gets or deletes the cookie.
 Serves a file to the response.
 
 #### Params
+
 - **String** `path`: Relative path to the file.
 - **String** `customRoot`: Absolute path to the root directory (optional).
 
@@ -120,6 +132,7 @@ It emits the following events:
  - `error` (err): Errors which may appear during the server initialization.
 
 #### Params
+
 - **Object** `opt_options`: An object containing the following properties:
     - `host` (String): The server host.
     - `port` (Integer): The server port. `process.env.PORT` is used, default is `3000`.
@@ -166,6 +179,7 @@ It emits the following events:
 Adds a new static path to the server.
 
 #### Params
+
 - **String** `url`: The static path url endpoint.
 - **String** `localPath`: The local path to the directory.
 
@@ -173,6 +187,7 @@ Adds a new static path to the server.
 Adds a new page to be handled.
 
 #### Params
+
 - **String** `url`: The page url.
 - **String|Object** `method`: The request methods to be handled (default: `"all"`) or an object:
    - `method` (String): The HTTP method.
@@ -184,6 +199,7 @@ Adds a new page to be handled.
 Handle the error pages.
 
 #### Params
+
 - **Object** `options`: An object containing the following fields:
  - `notFound` (String|Function): The path to a custom 404 page or a function receiving the lien object as parameter. This can be used to serve custom 404 pages.
  - `serverError` (String|Function): The path to a custom 500 page or a function receiving the lien object as parameter. This can be used to serve custom 500 pages.
@@ -192,6 +208,7 @@ Handle the error pages.
 Gets the transformer for a url.
 
 #### Params
+
 - **String** `type`: The hook type (`before` or `after`).
 - **String** `url`: The url.
 - **String** `method`: The method.
@@ -204,6 +221,7 @@ Similar to `getHooks`, but doesn't concat hooks based on the regex
 matching but only if they are the same regex.
 
 #### Params
+
 - **String** `type`: The hook type (`before` or `after`).
 - **String** `url`: The url.
 - **String** `method`: The method.
@@ -215,6 +233,7 @@ matching but only if they are the same regex.
 Inserts a new hook.
 
 #### Params
+
 - **String** `type`: The hook type (`before`, `after`, `custom:name`).
 - **String** `url`: The url.
 - **String** `method`: The method.
@@ -227,6 +246,7 @@ Inserts a new hook.
 Adds a new hook.
 
 #### Params
+
 - **String** `where`: The hook type (`before` or `after`).
 - **String** `url`: The route url.
 - **String** `method`: The HTTP method.
@@ -237,6 +257,7 @@ Adds a new hook.
 Adds a before hook. It will handle all the subroutes of the `url`.
 
 #### Params
+
 - **String** `url`: The route url.
 - **String** `method`: The HTTP method.
 - **Function** `cb`: The callback function.
@@ -246,6 +267,7 @@ Adds a before hook. It will handle all the subroutes of the `url`.
 Adds a before hook. It will handle all the subroutes of the `url`.
 
 #### Params
+
 - **String** `url`: The route url.
 - **String** `method`: The HTTP method.
 - **Function** `cb`: The callback function.
@@ -255,6 +277,7 @@ Adds a before hook. It will handle all the subroutes of the `url`.
 Use this function to add middleware handlers.
 
 #### Params
+
 - **String** `url`: The route url.
 - **String** `method`: The HTTP method.
 - **Function** `cb`: The callback function.
@@ -264,6 +287,7 @@ Use this function to add middleware handlers.
 Adds a new middleware. **Note**: This will *not* trigger the hooks.
 
 #### Params
+
 - **String** `url`: The endpoint url.
 - **String** `method`: The HTTP method (default: `all`).
 - **Function** `cb`: The callback function.
