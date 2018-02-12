@@ -171,6 +171,10 @@ It emits the following events:
 
     - `logErrors` (Boolean): Log the server errors (default: `true`).
     - `csrf` (Object): The CSRF options. These are passed to [`csurf`](https://github.com/expressjs/csurf)
+    - `bodyParserJson` (Boolean): Whether to enable the JSON body parser (default: `true`)
+    - `bodyParserUrlEncoded` (Boolean): Whether to enable the URL encoded body parser (default: `true`)
+    - `cookieParser` (Boolean): Whether to enable the cookie parser (default: `true`)
+    - `transformers` (Boolean): Whether to enable the transformers (default: `true`)
 
 #### Return
 - **Object** The Lien instance.
