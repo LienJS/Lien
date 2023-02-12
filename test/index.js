@@ -116,7 +116,7 @@ tester.describe("lien", t => {
     });
 
     t.should("add before hook", () => {
-        server.hook("before", "*", "get", lien => {
+        server.hook("before", "(.*)", "get", lien => {
             lien.anotherFromBeforeHook = true;
         });
     });
@@ -255,7 +255,7 @@ tester.describe("lien", t => {
     });
 
     t.it("load static HTML file", cb => {
-        server.hook("before", ":foo.*", (lien, cb) => {
+        server.hook("before", ":foo(.*)", (lien, cb) => {
             if (!~lien.path.indexOf(".")) {
                 return cb();
             }
