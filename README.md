@@ -484,20 +484,22 @@ Thanks! :heart:
 If you are using this library in one of your projects, add it in this list. :sparkles:
 
  - `bloggify`
+ - `bloggify-cli`
  - `gh-contributions`
  - `web-term`
- - `bloggify-prebuilt`
- - `test-youtube-api`
- - `learning-nodejs-file-upload`
- - `wrabbit`
- - `youtube-album-uploader`
  - `bloggify-server-prebuilt`
- - `learning-node-file-upload`
+ - `@dottjt/mediareade`
+ - `youtube-album-uploader`
  - `youtube-album-uploader-multiple`
+ - `bnotify`
+ - `test-youtube-api`
+ - `bloggify-prebuilt`
+ - `learning-node-file-upload`
+ - `fb-token-updater`
  - `chewb-youtube-uploader`
  - `nodejs-youtube-uploader`
- - `@dottjt/mediareade`
- - `bnotify`
+ - `wrabbit`
+ - `learning-nodejs-file-upload`
 
 
 
