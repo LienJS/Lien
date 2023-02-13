@@ -484,14 +484,14 @@ Thanks! :heart:
 If you are using this library in one of your projects, add it in this list. :sparkles:
 
  - `bloggify`
- - `bloggify-cli`
  - `gh-contributions`
+ - `bloggify-cli`
  - `web-term`
  - `bloggify-server-prebuilt`
- - `@dottjt/mediareade`
  - `youtube-album-uploader`
  - `youtube-album-uploader-multiple`
  - `bnotify`
+ - `@dottjt/mediareade`
  - `test-youtube-api`
  - `bloggify-prebuilt`
  - `learning-node-file-upload`
