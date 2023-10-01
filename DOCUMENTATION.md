@@ -110,7 +110,7 @@ Sets, gets or deletes the cookie.
 - **String** `value`: If provided and it not `null`, the cookie will be set. If it's null, the cookie will be deleted. If `value` is not provided, the cookie value will be returned.
 
 #### Return
-- **String|null|undefined** `null`, if the cookie was deleted. `undefined` if the cookie doesn't exist. The cookie value if this exists.
+- **String** `null`, if the cookie was deleted. `undefined` if the cookie doesn't exist. The cookie value if this exists.
 
 ### `file(path, customRoot)`
 Serves a file to the response.
@@ -218,7 +218,7 @@ Gets the transformer for a url.
 - **String** `method`: The method.
 
 #### Return
-- **Transformer|null** The transformer (if it exists) or `null`.
+- **Transformer** The transformer (if it exists) or `null`.
 
 ### `getHooksStrict(type, url, method)`
 Similar to `getHooks`, but doesn't concat hooks based on the regex
@@ -231,7 +231,7 @@ matching but only if they are the same regex.
 - **String** `method`: The method.
 
 #### Return
-- **Transformer|null** The transformer (if it exists) or `null`.
+- **Transformer** The transformer (if it exists) or `null`.
 
 ### `insertHook(type, url, method, trans)`
 Inserts a new hook.
