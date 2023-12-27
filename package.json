@@ -3,7 +3,7 @@
     "test": "node test/index.js"
   },
   "name": "lien",
-  "version": "3.4.3",
+  "version": "3.4.4",
   "description": "An easy to use web framework for Node.js.",
   "main": "lib/index.js",
   "keywords": [
