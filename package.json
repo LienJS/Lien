@@ -37,7 +37,7 @@
     "h_img": "https://raw.githubusercontent.com/LienJS/Resources/master/logo/header.png"
   },
   "dependencies": {
-    "body-parser": "^1.15.0",
+    "body-parser": "^2.2.1",
     "cookie-parser": "^1.4.3",
     "csurf": "^1.9.0",
     "express": "^4.13.4",
