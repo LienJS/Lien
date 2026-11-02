@@ -1,11 +1,9 @@
-"use strict";
-
-const Lien = require("../lib");
+import Lien from "../lib/index.js";
 
 // Init lien server
 const server = new Lien({
-    port: 9000
-  , public: `${__dirname}/public`
+    port: 9000,
+    public: `${import.meta.dirname}/public`
 });
 
 // Listen for load

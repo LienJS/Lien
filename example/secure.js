@@ -1,14 +1,13 @@
-// Dependencies
-var Lien = require("../lib");
+import Lien from "../lib/index.js";
 
 // Init lien server
-var server = new Lien({
-    host: "localhost"
-  , port: 9000
-  , public: __dirname + "/public"
-  , ssl: {
-        key: __dirname + "/ssl/key.pem"
-      , cert: __dirname + "/ssl/cert.pem"
+const server = new Lien({
+    host: "localhost",
+    port: 9000,
+    public: import.meta.dirname + "/public",
+    ssl: {
+        key: import.meta.dirname + "/ssl/key.pem",
+        cert: import.meta.dirname + "/ssl/cert.pem"
     }
 });
 
@@ -27,5 +26,4 @@ server.addPage("/", function (lien) {
 server.addPage("/post/:id", function (lien) {
     lien.end("Post id: " + lien.params.id);
 });
-
 server.addPage("/test", "/index.html");

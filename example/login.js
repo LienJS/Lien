@@ -1,21 +1,21 @@
-// Dependencies
-const Lien = require("../lib");
+import Lien from "../lib/index.js";
+import MongoStore from "connect-mongo";
 
 const users = {
-    Alice: "123"
-  , Bob: "1234"
+    Alice: "123",
+    Bob: "1234"
 };
 
 // Init lien app
 const app = new Lien({
-    host: "localhost"
-  , port: 9000
-  , public: `${__dirname}/public`
-  , session: {
-        store: "connect-mongo"
-      , storeOptions: {
-            url: "mongodb://localhost/test-app"
-        }
+    host: "localhost",
+    port: 9000,
+    public: `${import.meta.dirname}/public`,
+    session: {
+        secret: process.env.SESSION_SECRET,
+        store: MongoStore.create({
+            mongoUrl: process.env.MONGO_URL || "mongodb://127.0.0.1/test-app"
+        })
     }
 });
 
@@ -33,9 +33,8 @@ app.all("/", lien => {
         lien.file("login.html");
     }
 });
-
 app.post("/api/login", lien => {
-    if (!lien.data.username || !lien.data.password) {
+    if (!lien.data?.username || !lien.data?.password) {
         return lien.apiError("Incomplete data.");
     }
 
@@ -45,26 +44,22 @@ app.post("/api/login", lien => {
 
     if (users[lien.data.username] === lien.data.password) {
         lien.startSession({
-            logged_in: true
-          , authenticated_at: new Date()
-          , username: lien.data.username
+            logged_in: true,
+            authenticated_at: new Date(),
+            username: lien.data.username
         });
         return lien.redirect("/");
     }
-
     lien.apiError("Invalid credentials.", 403);
 });
-
 app.get("/api/session", lien => {
     lien.end(lien.getSessionData());
 });
-
-app.post("/api/logout", lien => {
+app.post("/api/logout", async lien => {
     if (!lien.getSessionData("logged_in")) {
         return lien.apiError("You were not logged in anyways.");
     }
-
-    lien.destroySession();
+    await lien.destroySession();
     lien.redirect("/");
 });
 
@@ -72,8 +67,7 @@ app.post("/api/logout", lien => {
 app.get("/post/:id", lien => {
     lien.end("Post id: " + lien.params.id);
 });
-
-app.use("/auth", (lien, next) => {
+app.use("/auth", async lien => {
     const username = lien.getSessionData("username");
     lien.user = username ? {
         name: username
@@ -83,24 +77,19 @@ app.use("/auth", (lien, next) => {
             error: "Unauthorized"
         });
     }
-    next();
 });
-
 app.get("/auth", lien => {
     lien.end({
         user: "/auth/user"
     });
 });
-
 app.get("/auth/user", lien => {
     lien.end({
         foo: "Bar",
         user: lien.user
     });
 });
-
 app.get("/test", "/index.html");
-
 app.on("serverError", err => {
     console.log(err.stack);
 });

@@ -1,298 +1,240 @@
-## Documentation
-
-You can see below the API reference of this module.
-
-### `LienCreator(req, res, next, server)`
-Creates the `lien` object.
-
-#### Params
-
-- **Object** `req`: The request object.
-- **Object** `res`: The response object.
-- **Function** `next`: The `next` middleware function.
-- **Object** `server`: The `Lien` server instance.
-
-#### Return
-- **Lien** The lien object.
-
-### `next()`
-Go to the next middleware handler.
-
-#### Return
-- **Lien** The `Lien` instance.
-
-### `redirect(newUrl, query)`
-Redirects the client to another url.
-
-#### Params
-
-- **String** `newUrl`: The new url to redirect to.
-- **Boolean|Object** `query`: If `true`, the request querystring parameters will be appended. If it's an object, it will be merged with the request querystring parameters.
-
-### `render(template, data)`
-Renders a template to the client.
-
-#### Params
-
-- **String** `template`: The template name.
-- **Object** `data`: The template data.
-
-### `startSession(data)`
-Starts a session.
-
-#### Params
-
-- **Object** `data`: The session data.
-
-### `setSessionData(data)`
-Sets the session data.
-
-#### Params
-
-- **Object** `data`: The session data.
-
-### `getSessionData(field)`
-Returns the session data object/specific field.
-
-#### Params
-
-- **Field** `field`: A specific field to get from the session object.
-
-#### Return
-- **Value|Object** The field value. If a field is not specified, the whole session data object is returned.
-
-### `destroySession()`
-Destroys the session.
-
-### `header(name, value)`
-Gets/sets/deletes headers.
-
-#### Params
-
-- **String** `name`: The header name.
-- **String** `value`: The header value to set. If `null`, the header will be *removed*.
-
-#### Return
-- **Lien** The Lien instance.
-
-### `apiMsg(msg, status)`
-Sends to the client a JSON object containing the `message` field.
-
-#### Params
-
-- **String** `msg`: The API message.
-- **Number** `status`: The status code (default: `200`).
-
-### `apiError(msg, status)`
-Like `apiMsg`, but by default with a status code of `422`.
-
-#### Params
-
-- **String** `msg`: The API message.
-- **Number** `status`: The status code (default: `422`).
-
-### `end(content, status, contentType, headers)`
-Ends the response sending the content.
-
-#### Params
-
-- **Anything** `content`: The content that should be sent to the response.
-- **Number** `status`: The status code.
-- **String** `contentType`: The content type (e.g. `"json"`).
-- **Object** `headers`: Additional headers to send in the response.
-
-### `cookie(cookie, value)`
-Sets, gets or deletes the cookie.
-
-#### Params
-
-- **String** `cookie`: The searched cookie.
-- **String** `value`: If provided and it not `null`, the cookie will be set. If it's null, the cookie will be deleted. If `value` is not provided, the cookie value will be returned.
-
-#### Return
-- **String|null|undefined** `null`, if the cookie was deleted. `undefined` if the cookie doesn't exist. The cookie value if this exists.
-
-### `file(path, customRoot)`
-Serves a file to the response.
-
-#### Params
-
-- **String** `path`: Relative path to the file.
-- **String** `customRoot`: Absolute path to the root directory (optional).
-
-### `Lien(opt_options)`
-Creates a new Lien instance.
-
-It extends the `EventEmitter` class.
-
-It emits the following events:
-
- - `load` (err): After the server is started. If there are no errors, the `err` will be null.
- - `serverError` (err, req, res): This is emitted when something goes wrong after the server is started.
- - `error` (err): Errors which may appear during the server initialization.
-
-#### Params
-
-- **Object** `opt_options`: An object containing the following properties:
-    - `host` (String): The server host.
-    - `port` (Integer): The server port. `process.env.PORT` is used, default is `3000`.
-    - `session` (Boolean|Object): Enable the session support. If it's an object, it will be merged with the following defaults and passed to [`express-session`](https://github.com/expressjs/session):
-      - `secret` (String): This is the secret used to sign the session ID cookie (default: "lien server").
-      - `resave` (Boolean): Forces the session to be saved back to the session store, even if the session was never modified during the request (default: false).
-      - `saveUninitialized` (Boolean): Forces a session that is "uninitialized" to be saved to the store (default: `true`).
-      - `cookie` (Object): The cookie [options](https://github.com/expressjs/cookie-parser).
-      - `storeOptions` (Object): The session store options. These options are passed to the session store you choose.
-      - `store`: (String|Function): The session store name or function. By default it's using a memory store if the session is enabled.
-    - `public` (String|Array): The path to the public directory or an array of arrays in this format: `["/url/of/static/dir", "path/to/static/dir"]`.
-
-      Example:
-
-      ```js
-      [
-        ["/images", "path/to/images"]
-      , ["/", "path/to/public"]
-      ]
-      ```
-
-    - `ssl` (Object): An object containing the following fields:
-        - `key` (String): The path to the key file.
-        - `cert` (String): The path to the cert file.
-        - `_key` (String|Buffer): The key file content (defaults to the key file content).
-        - `_cert` (String|Buffer): The cert file content (defaults to the cert file content).
-
-    - `views`
-      - `path` (String): The path to the views directory.
-      - `name` (String): The view engine name.
-
-    - `errorPages` (Object):
-      - `notFound` (String|Function): The path to a custom 404 page or a function receiving the lien object as parameter. This can be used to serve custom 404 pages.
-      - `serverError` (String|Function): The path to a custom 500 page or a function receiving the lien object as parameter. This can be used to serve custom 500 pages.
-      - `badCsrf` (String|Function):  The path to a custom bad CSRF page or a function receiving the lien object as parameter. This can be used to serve custom bad CSRF errors.
-
-    - `logErrors` (Boolean): Log the server errors (default: `true`).
-    - `csrf` (Object): The CSRF options. These are passed to [`csurf`](https://github.com/expressjs/csurf)
-    - `bodyParserJson` (Boolean): Whether to enable the JSON body parser (default: `true`)
-    - `bodyParserUrlEncoded` (Boolean): Whether to enable the URL encoded body parser (default: `true`)
-    - `cookieParser` (Boolean): Whether to enable the cookie parser (default: `true`)
-    - `transformers` (Boolean): Whether to enable the transformers (default: `true`)
-
-#### Return
-- **Object** The Lien instance.
-
-### `addStaticPath(url, localPath)`
-Adds a new static path to the server.
-
-#### Params
-
-- **String** `url`: The static path url endpoint.
-- **String** `localPath`: The local path to the directory.
-
-### `addPage(url, method, output)`
-Adds a new page to be handled.
-
-#### Params
-
-- **String** `url`: The page url.
-- **String|Object** `method`: The request methods to be handled (default: `"all"`) or an object:
-   - `method` (String): The HTTP method.
-   - `before` (Array|Function): A function or an array of middleware functions to be executed *before* the main function.
-   - `after` (Array|Function): A function or an array of middleware functions to be executed *after* the main function.
-- **Function** `output`: A function receiving the `lien` object as parameter. If can be a path serving a public file.
-
-### `errorPages(options)`
-Handle the error pages.
-
-#### Params
-
-- **Object** `options`: An object containing the following fields:
- - `notFound` (String|Function): The path to a custom 404 page or a function receiving the lien object as parameter. This can be used to serve custom 404 pages.
- - `serverError` (String|Function): The path to a custom 500 page or a function receiving the lien object as parameter. This can be used to serve custom 500 pages.
-
-### `getHooks(type, url, method)`
-Gets the transformer for a url.
-
-#### Params
-
-- **String** `type`: The hook type (`before` or `after`).
-- **String** `url`: The url.
-- **String** `method`: The method.
-
-#### Return
-- **Transformer|null** The transformer (if it exists) or `null`.
-
-### `getHooksStrict(type, url, method)`
-Similar to `getHooks`, but doesn't concat hooks based on the regex
-matching but only if they are the same regex.
-
-#### Params
-
-- **String** `type`: The hook type (`before` or `after`).
-- **String** `url`: The url.
-- **String** `method`: The method.
-
-#### Return
-- **Transformer|null** The transformer (if it exists) or `null`.
-
-### `insertHook(type, url, method, trans)`
-Inserts a new hook.
-
-#### Params
-
-- **String** `type`: The hook type (`before`, `after`, `custom:name`).
-- **String** `url`: The url.
-- **String** `method`: The method.
-- **Transformer** `trans`: The transformer to insert.
-
-#### Return
-- **Transformer** The inserted transformer.
-
-### `hook(where, url, method, cb, transType)`
-Adds a new hook.
-
-#### Params
-
-- **String** `where`: The hook type (`before` or `after`).
-- **String** `url`: The route url.
-- **String** `method`: The HTTP method.
-- **Function** `cb`: The callback function.
-- **Number** `transType`: The transformer type.
-
-### `before(url, method, cb, transType)`
-Adds a before hook. It will handle all the subroutes of the `url`.
-
-#### Params
-
-- **String** `url`: The route url.
-- **String** `method`: The HTTP method.
-- **Function** `cb`: The callback function.
-- **Number** `transType`: The transformer type.
-
-### `after(url, method, cb, transType)`
-Adds a before hook. It will handle all the subroutes of the `url`.
-
-#### Params
-
-- **String** `url`: The route url.
-- **String** `method`: The HTTP method.
-- **Function** `cb`: The callback function.
-- **Number** `transType`: The transformer type.
-
-### `use(url, method, cb, transType)`
-Use this function to add middleware handlers.
-
-#### Params
-
-- **String** `url`: The route url.
-- **String** `method`: The HTTP method.
-- **Function** `cb`: The callback function.
-- **Number** `transType`: The transformer type.
-
-### `add(url, method, cb)`
-Adds a new middleware. **Note**: This will *not* trigger the hooks.
-
-#### Params
-
-- **String** `url`: The endpoint url.
-- **String** `method`: The HTTP method (default: `all`).
-- **Function** `cb`: The callback function.
-
+# Lien API
+
+Lien requires **Node.js 22.12 or newer**. Its implementation, examples, and tests
+use ES modules. The package exports the default `Lien` constructor and named
+`Lien`, `LienObj`, and `Hooks` exports:
+
+```js
+import Lien, { Hooks } from "lien";
+const server = new Lien({
+    port: 9000,
+    public: `${import.meta.dirname}/public`
+});
+server.before("/posts/:id", async lien => {
+    lien.post = await findPost(lien.params.id);
+});
+server.get("/posts/:id", lien => lien.end(lien.post));
+server.after("/posts/:id", async response => {
+    response.headers["x-example"] = "yes";
+});
+await server.ready;
+// Later: await server.close();
+```
+
+On supported Node versions, `const Lien = require('lien')` still returns the same
+constructor through Node's native ESM interop. There is no separate CommonJS build.
+Relative ES module imports must include a filename, for example
+`import Lien from './lib/index.js'`.
+
+## Server and lifecycle
+
+`new Lien(options)` still starts listening automatically and extends
+`EventEmitter`. Register routes immediately after construction, then await
+`server.ready` or subscribe to `load`.
+
+| Member | Behavior |
+| --- | --- |
+| `ready` | Promise resolving to the server after it starts, or rejecting on initialization/listen errors. |
+| `close()` | Awaitable, idempotent shutdown; closes stores created by Lien, and leaves supplied store instances to their owner. |
+| `load(error)` event | Emitted with `null` on success or the startup error on failure. |
+| `error(error)` event | Startup errors are also emitted here when a listener is registered. |
+| `serverError(error, req, res)` event | Request errors; underlying server errors may omit `req` and `res`. |
+| `app`, `router`, `beforeRequest`, `staticRouter` | The Express application and routers. |
+| `server` | The underlying Node HTTP/HTTPS server. |
+| `options` | Effective configuration; `port` contains the actual bound port, including when initialized with `0`. |
+
+### Options
+
+| Option | Default / meaning |
+| --- | --- |
+| `host`, `port` | Listen address; port defaults to `process.env.PORT` or `3000`. Port `0` chooses an available port. |
+| `public` | A directory string or `[[url, directory], ...]`; defaults to `[]`. |
+| `views` | `{ path, name }`, passed to Express's views and view-engine settings. Install or register your chosen engine. |
+| `session` | `false`, `true`, or an express-session options object. |
+| `cookieSecret` | Random 32-byte secret per server. Set a stable secret for deployments sharing signed cookies or sessions. |
+| `cookieOptions` | Options passed to cookie-parser. |
+| `csrf` | `null`, `true` (cookie mode), or options for [`@dr.pogodin/csurf`](https://github.com/birdofpreyru/csurf). |
+| `bodyParserJson` | `true`, `false`, or options for `express.json()`. |
+| `bodyParserUrlEncoded` | `true`, `false`, or options for `express.urlencoded()`; `extended: true` by default. |
+| `cookieParser` | Whether to enable cookie-parser; defaults to `true`. |
+| `transformers` | Legacy option name controlling both before and after hooks; defaults to `true`. |
+| `logErrors` | Whether to log request errors; defaults to `true`. |
+| `errorPages` | `{ notFound, serverError, badCsrf }`, each a filename or a handler receiving `(lien, error)`. Defaults to built-in pages. Set `false` to configure error handling yourself. |
+| `ssl` | `{ key, cert }` certificate filenames, or `{ _key, _cert }` containing their contents. |
+
+JSON and form parsing use Express's built-in middleware. CSRF validation remains
+in place when route-specific middleware is configured. `csrf: true` requires
+cookie parsing; session-mode CSRF requires sessions.
+
+## Routes
+
+- `addPage(url, output)` handles all methods.
+- `addPage(url, method, output)` accepts an HTTP method name.
+- `get(url, output)`, `post(url, output)`, `all(url, output)`, and other HTTP-method
+  shortcuts retain the same signatures.
+- `output` is a function receiving `lien`, or a filename relative to the public root.
+  Async handlers and returned promises are supported; failures enter error handling.
+- `addPage(url, { method, before, after }, output)` accepts Express middleware
+  functions or arrays receiving `(req, res, next)`. These are distinct from Lien hooks.
+- `add(url, [method], callback)` adds a route without executing before hooks.
+  Responses sent with `lien.end()` still execute after hooks, matching prior behavior.
+- `addStaticPath(url, localPath)` adds a public static mount.
+- `errorPages(options)` appends custom fallback/error middleware. To replace all
+  defaults explicitly, construct with `errorPages: false` and call it after setup.
+
+The compatibility matcher preserves existing named parameters, optional/repeated
+parameters, regex constraints, URL arrays, and RegExp routes. `'*'` matches every
+path. Lien retains fixed-route priority ahead of static serving, with dynamic
+routes following static serving. Express 5's own `app`/router APIs use its new
+[route syntax](https://expressjs.com/en/guide/migrating-5/#path-syntax); the
+compatibility layer applies to Lien's routing methods.
+
+## Request and response helpers
+
+`LienObj(req, res, next, server)` is available as `Lien.LienObj` and as a named
+export. Every request receives its own instance.
+
+| Member | Behavior |
+| --- | --- |
+| `req`, `res`, `server` | Underlying Express request/response and Lien server. |
+| `path`, `pathname`, `full_path` | Normalized request path, mounted pathname, and original URL with query. |
+| `host`, `protocol`, `domain`, `href` | Request hostname, protocol, origin including port, and full URL. |
+| `method`, `params`, `query`, `data` | Lowercase method, decoded route parameters, query parameters, and parsed body. |
+| `cookies`, `session` | Parsed cookies and the express-session object. |
+| `csrfToken`, `csrfInput` | Token and hidden form input, or empty strings when CSRF is disabled. |
+| `accepts(...types)` | Express content negotiation. |
+| `next(error, data)` | Delegates to Express once and stops further hook execution. Returns the Lien object. |
+| `header(name, value)` | Reads a request header with one string argument; sets a response header with two arguments; `null` removes it. An object sets multiple headers, and no arguments returns request headers. |
+| `cookie(name, value, options)` | Reads, sets, or clears a cookie. Clearing with `null` forwards path/domain/etc. options. |
+| `redirect(url, query)` | Sends a redirect. `true` merges request query parameters; an object overrides them. Existing target parameters and fragments are preserved. |
+| `render(template, data)` | Awaitable template rendering. |
+| `file(filename, customRoot)` | Awaitable file serving under the supplied root or first public directory. Leading slashes mean root-relative paths; traversal and escaping symlinks are denied. |
+| `end(content, status, contentType, headers)` | Awaitable response with after hooks. Also supports `end(content, status, headers)` and `end(status, headers)`. |
+| `apiMsg(message, status = 200)` | JSON `{ message }` through `end()`. |
+| `apiError(message, status = 422)` | Like `apiMsg`; accepts a message or an Error's message. |
+| `append`, `attachment`, `download`, `json`, `jsonp`, `links`, `vary`, `status` | Chainable Express response helpers with the same arguments. |
+
+`end()` preserves a previously chosen status unless an explicit status overrides
+it. Objects serialize as JSON; strings, Buffers, XML strings, and empty responses
+remain supported. Error objects and serialization failures enter error handling
+instead of returning stack traces or false success responses. Malformed/oversized
+request bodies retain their HTTP 400/413 status.
+
+After hooks apply to `end()` and helpers using it, including `apiMsg()` and
+`apiError()`. Express-backed `render()`, `file()`, `redirect()`, `download()`,
+`json()`, and `jsonp()` bypass after hooks as before.
+
+## Hooks
+
+Registration APIs remain unchanged:
+
+```js
+server.before(url, [method], callback, mode);
+server.after(url, [method], callback, mode);
+server.hook("before", url, [method], callback, mode);
+server.use(url, [method], callback, mode);
+```
+
+Omitting the method applies to all methods. URL arrays and wildcards are
+supported. `before()` and `after()` match the given pattern; `use()` also matches
+subpaths. `use()` remains a route-hook helper and does not authenticate public
+static files.
+
+Before hooks receive `lien`. After hooks receive
+`{ content, status, headers, contentType, lien }`. Mutate these objects in place;
+return values do not replace them. Prefer async hooks:
+
+```js
+server.before("/account", async lien => {
+    lien.user = await loadUser(lien);
+    if (!lien.user) await lien.end("Unauthorized", 403);
+});
+
+// Existing callback hooks continue to work.
+server.after("/account", (response, next) => {
+    response.headers["x-account"] = "yes";
+    next();
+});
+```
+
+Hooks declaring zero or one argument complete when they return; promises are
+awaited. Hooks declaring two or more arguments receive `(data, next)` and wait for
+`next()` or a returned promise. The first completion wins. Thrown errors,
+`next(error)`, and rejected promises enter error handling; error responses skip
+failing after hooks. `next()` advances the hook chain, while `lien.next()`
+delegates to Express. Ending the response or disconnecting the client stops
+subsequent hooks; already running asynchronous work cannot be undone.
+
+Every execution snapshots its definitions and owns its data and completion state.
+A reusable pipeline never stores the previous request's data.
+
+| Mode | Value | Behavior within a matching URL group |
+| --- | --- | --- |
+| `ORDERED` | `3` | Sequential; the default. |
+| `UNORDERED` | `2` | Consecutive entries run together; later steps wait for them. |
+| `PARALLEL` | `1` | A sequential prelude before the group's other entries, preserving the old implementation's actual behavior. |
+
+Numbers and string names such as `'UNORDERED'` remain accepted. Constants are
+available on `Lien.Hooks` and the named `Hooks` export. Matching URL groups run in
+registration order.
+
+### Low-level pipelines
+
+- `getHooks(type, url, method)` returns a matching `Hooks` pipeline or `null`.
+- `getHooksStrict(type, url, method)` matches the registered pattern itself.
+- `insertHook(type, url, method, pipeline)` inserts and returns a native pipeline;
+  `type` may also be `custom:name`.
+- `pipeline.add(callbackOrPipeline, mode)` accepts a function, native pipeline, or
+  array and returns the pipeline.
+- `await pipeline.run(data, { signal, isStopped })` executes with optional cancellation.
+- `pipeline.start(data, callback)` preserves `(error, data)` callback completion
+  and returns a cancellation function. `start(callback)` uses a fresh empty object.
+- Pipelines emit `end(error, data)` once per execution, including cancellation.
+
+External Transformer instances must be rebuilt from their original callbacks
+using `new Hooks()`. Arbitrary shared `.start()` objects, constructor data,
+autostart, and private Transformer fields are not supported. Invalid modes and
+cyclic composition throw `TypeError`.
+
+## Sessions
+
+`session: true` enables the default memory store. Session objects accept normal
+[express-session options](https://github.com/expressjs/session#options), plus
+`storeOptions` for stores created by Lien. Defaults are `resave: false` and
+`saveUninitialized: true`. An explicit `session.secret` takes precedence over
+`cookieSecret`; otherwise the server's cookie secret is used. Configure stable
+secrets when sessions must survive restarts or span multiple instances.
+
+`store` accepts an existing store, a provider with `create(options)`, a Store
+subclass, a legacy `factory(expressSession)` returning a Store class, or an
+installed module name. String providers load through dynamic `import()` before
+listening. Native ES module providers and modern connect-mongo are supported.
+
+- `startSession(data)` and `setSessionData(data)` merge application session data.
+- `getSessionData()` returns that data; `getSessionData('nested.field')` returns a
+  field or `null` when missing, preserving `false`, `0`, and empty strings.
+- `await destroySession()` completes after the store removes the session.
+
+The login example uses `connect-mongo@6`, `MongoStore.create({ mongoUrl })`, and
+`SESSION_SECRET`/`MONGO_URL` environment variables. It requires a MongoDB server.
+The TLS example requires certificate files under `example/ssl`.
+
+## Development
+
+```sh
+npm ci
+npm test
+npm run test:coverage
+```
+
+Tests use only Node's native `node:test`, `node:assert`, and HTTP client, with
+isolated servers, assigned ports, timeouts, and awaited teardown. The only
+example/test dependency is connect-mongo; template rendering is checked with a
+small registered fixture engine. The lockfile makes development installs
+reproducible. CI covers Node 22.12, 24, and 26.
+
+Runtime dependencies are Express 5, express-session, cookie-parser, the maintained
+CSRF fork, and path-to-regexp 6.3. The latter preserves Lien's existing route
+pattern syntax while Express uses its current matcher internally. Utilities,
+body parsing, serialization, hook execution, and tests no longer require the
+previous helper packages.
