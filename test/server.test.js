@@ -152,6 +152,33 @@ test("legacy optional, repeated, regex, array, wildcard, and HEAD routes work on
         assert.equal((await request(`${url}/optional/1`, "HEAD")).body, "");
     });
 });
+test("path-to-regexp 9 routes retain custom legacy constraints and accept optional groups", async () => {
+    await withServer(server => {
+        server.before("/digits/:id(\\d+)/:name", lien => {
+            lien.label = "matched:";
+        });
+        server.get("/digits/:id(\\d+)/:name", lien => lien.end(`${lien.label}${lien.params.id}:${lien.params.name}`));
+        server.get("/choice/:id((?:ab|cd)\\d+)", lien => lien.end(lien.params.id));
+        server.get("/modern{/:id}", lien => lien.end(lien.params));
+        server.addPage([/^\/raw\/(\d+)$/, "/named/:id"], "get", lien => lien.end(lien.params));
+    }, async (server, url) => {
+        assert.equal((await request(`${url}/digits/12/alice`)).body, "matched:12:alice");
+        assert.equal((await request(`${url}/digits/no/alice`)).status, 404);
+        assert.equal((await request(`${url}/choice/ab3`)).body, "ab3");
+        assert.equal((await request(`${url}/choice/ef3`)).status, 404);
+        assert.deepEqual(JSON.parse((await request(`${url}/modern`)).body), {});
+        assert.deepEqual(JSON.parse((await request(`${url}/modern/7`)).body), { id: "7" });
+        assert.deepEqual(JSON.parse((await request(`${url}/raw/4`)).body), { 0: "4" });
+        assert.deepEqual(JSON.parse((await request(`${url}/named/5`)).body), { id: "5" });
+    });
+});
+test("legacy catch-all routes retain their numeric capture", async () => {
+    await withServer(server => {
+        server.get("*", lien => lien.end(lien.params));
+    }, async (server, url) => {
+        assert.deepEqual(JSON.parse((await request(`${url}/anything`)).body), { 0: "/anything" });
+    });
+});
 test("custom error pages, content negotiation, and middleware after delegation", async () => {
     await withServer(server => {
         server.addPage("/delegate", {

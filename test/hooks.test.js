@@ -185,6 +185,18 @@ test("registration overloads, methods, arrays, wildcards, use, and response muta
         assert.strictEqual(errors.length, 0);
     });
 });
+test("use hooks run once for their base path and include subpaths", async () => {
+    await withServer(server => {
+        server.use("/scope", lien => {
+            lien.hits = (lien.hits ?? 0) + 1;
+        });
+        server.get("/scope", lien => lien.end(String(lien.hits)));
+        server.get("/scope/child", lien => lien.end(String(lien.hits)));
+    }, async (server, url) => {
+        assert.equal((await request(`${url}/scope`)).body, "1");
+        assert.equal((await request(`${url}/scope/child`)).body, "1");
+    });
+});
 test("lookup pipelines remain mutable; custom hook pipelines can be inserted and started", async () => {
     await withServer(server => {
         assert.strictEqual(server.getHooks("before", "/missing", "get"), null);

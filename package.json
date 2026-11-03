@@ -32,14 +32,14 @@
   },
   "homepage": "https://github.com/LienJS/Lien",
   "blah": {
-    "h_img": "https://raw.githubusercontent.com/LienJS/Resources/master/logo/header.png"
+    "h_img": "assets/logo.svg"
   },
   "dependencies": {
     "@dr.pogodin/csurf": "^1.18.2",
     "cookie-parser": "^1.4.7",
     "express": "^5.3.0",
     "express-session": "^1.19.0",
-    "path-to-regexp": "^6.3.0"
+    "path-to-regexp": "^9.0.0"
   },
   "type": "module",
   "engines": {
@@ -57,6 +57,7 @@
     "./lib/to-buffer": "./lib/to-buffer.js"
   },
   "files": [
+    "assets/",
     "lib/",
     "example/",
     "README.md",
