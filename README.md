@@ -7,7 +7,7 @@
 
 
 
-[![Lien logo](assets/logo.svg)](#)
+[![Lien logo](assets/logo.png)](#)
 
 
 

@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/LienJS/Lien",
   "blah": {
-    "h_img": "assets/logo.svg"
+    "h_img": "assets/logo.png"
   },
   "dependencies": {
     "@dr.pogodin/csurf": "^1.18.2",
