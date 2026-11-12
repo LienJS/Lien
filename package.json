@@ -4,7 +4,7 @@
     "test:coverage": "node --test --test-timeout=15000 --experimental-test-coverage test/*.test.js"
   },
   "name": "lien",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "An easy to use web framework for Node.js.",
   "main": "lib/index.js",
   "keywords": [
