@@ -38,6 +38,35 @@ test("fixed routes, dynamic routes, static mounts, and templates", async () => {
         views
     });
 });
+test("directory index routes and hooks accept a single optional trailing slash", async () => {
+    await withServer(server => {
+        server.use("/dashboard/", lien => {
+            lien.useCalls = (lien.useCalls ?? 0) + 1;
+        });
+        server.before("/dashboard/quotes/", lien => {
+            lien.quotesHook = true;
+        });
+        server.addPage("/dashboard/", lien => lien.end({ page: "dashboard", useCalls: lien.useCalls }));
+        server.addPage("/dashboard/quotes/", lien => lien.end({
+            page: "quotes",
+            useCalls: lien.useCalls,
+            quotesHook: lien.quotesHook
+        }));
+    }, async (server, url) => {
+        for (const slash of ["", "/"]) {
+            const dashboard = await request(`${url}/dashboard${slash}`);
+            assert.equal(dashboard.status, 200);
+            assert.deepEqual(JSON.parse(dashboard.body), { page: "dashboard", useCalls: 1 });
+
+            const quotes = await request(`${url}/dashboard/quotes${slash}`);
+            assert.equal(quotes.status, 200);
+            assert.deepEqual(JSON.parse(quotes.body), { page: "quotes", useCalls: 1, quotesHook: true });
+        }
+        assert.equal((await request(`${url}/dashboard//`)).status, 404);
+        assert.equal((await request(`${url}/dashboard-extra`)).status, 404);
+        assert.equal(server.getHooks("before", "/dashboard-extra", "get"), null);
+    });
+});
 test("request fields include the actual host and assigned port", async () => {
     await withServer(server => {
         server.get("/fields/:id", lien => lien.end({
@@ -143,6 +172,7 @@ test("legacy optional, repeated, regex, array, wildcard, and HEAD routes work on
         assert.deepEqual(JSON.parse((await request(`${url}/regexp/12`)).body), {
             0: "12"
         });
+        assert.equal((await request(`${url}/regexp/12/`)).status, 404);
         assert.deepEqual(JSON.parse((await request(`${url}/two/2`)).body), {
             id: "2"
         });
